@@ -1,7 +1,14 @@
 import { Card, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getGlobalSummaryActions } from "../store/Actions";
+import {
+  getGlobalSummaryActions,
+  getSearchByCountryResultsActions,
+} from "../store/Actions";
 import { useEffect } from "react";
+import SearchForm from "../forms/SearchForm";
+import { debounce } from "lodash";
+import { useMemo } from "react";
+import RankCountries from "./RankCountries";
 
 export const CountryCard = () => {
   const dispatch = useDispatch();
@@ -17,14 +24,26 @@ export const CountryCard = () => {
     })
   );
 
+  const debouncedOnChange = useMemo(
+    () =>
+      debounce(async (q) => {
+        dispatch(getSearchByCountryResultsActions(q));
+      }, 500),
+    [dispatch]
+  );
+
+  const changeHandler = (event) => {
+    debouncedOnChange(event.target.value);
+  };
+
   const listCountries =
     searchResults.length !== 0
       ? searchResults.map((country) => (
           <Col>
-            <Card key={country.Country} className="text-center">
+            <Card key={country.Slug} className="text-center">
               <Card.Body>
                 <Card.Title>{country?.Country}</Card.Title>
-                <Card.Text>Cases: {country?.NewConfirmed}</Card.Text>
+                <Card.Text>Cases: {country?.TotalConfirmed}</Card.Text>
                 <Card.Text>Recovered: {country?.NewRecovered}</Card.Text>
                 <Card.Text>Deaths: {country?.NewDeaths}</Card.Text>
               </Card.Body>
@@ -33,19 +52,21 @@ export const CountryCard = () => {
         ))
       : countries.map((country) => (
           <Col>
-            <Card key={country.Country} className="text-center">
+            <Card key={country.Slug} className="text-center">
               <Card.Body>
                 <Card.Title>{country?.Country}</Card.Title>
-                <Card.Text>Cases: {country?.NewConfirmed}</Card.Text>
+                <Card.Text>Cases: {country?.TotalConfirmed}</Card.Text>
                 <Card.Text>Recovered: {country?.NewRecovered}</Card.Text>
                 <Card.Text>Deaths: {country?.NewDeaths}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
-        ))
+        ));
 
   return (
     <>
+      <SearchForm changeHandler={changeHandler} />
+      <RankCountries searchResults={searchResults} countries={countries}/>
       <Row xs={1} md={6} className="g-4" style={{ margin: "0px" }}>
         {listCountries}
       </Row>

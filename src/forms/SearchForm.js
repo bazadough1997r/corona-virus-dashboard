@@ -1,13 +1,6 @@
 import Form from "react-bootstrap/Form";
-import { useDispatch } from "react-redux";
-import { getSearchByCountryResultsActions } from "../store/Actions";
 
-export const SearchForm = () => {
-  const dispatch = useDispatch();
-
-  const changeHandler = (event) => {
-    dispatch(getSearchByCountryResultsActions(event.target.value));
-  };
+export const SearchForm = ({ changeHandler}) => {
 
   return (
     <div style={{ margin: "10px" }}>

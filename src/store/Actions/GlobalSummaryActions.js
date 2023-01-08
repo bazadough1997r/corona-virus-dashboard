@@ -35,7 +35,7 @@ import {
       type: GET_SEARCH_RESULTS,
     });
     try {
-      const data = await getSearchByCountryResultsService(query);
+      const data = await getSearchByCountryResultsService(query.toLowerCase());
       dispatch({
         type: GET_SEARCH_RESULTS_SUCCESS,
         payload: data,
