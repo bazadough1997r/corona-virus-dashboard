@@ -69,7 +69,7 @@ import {
     } catch (err) {
       dispatch({
         type: SORT_FROM_LOWEST_FAIL,
-        err: "Cannot rank countries!",
+        err: "Cannot rank countries from lowest right now!",
       });
     } 
   };
@@ -87,7 +87,7 @@ import {
     } catch (err) {
       dispatch({
         type: SORT_FROM_HIGHEST_FAIL,
-        err: "Cannot rank countries!",
+        err: "Cannot rank countries from highest right now!",
       });
     } 
   };

@@ -29,11 +29,13 @@ export default function globalSummaryReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        err: "",
       };
     case GET_GLOBAL_SUMMARY_SUCCESS:
       return {
         ...state,
         loading: false,
+        err: "",
         totalDeaths: action?.payload?.Global?.TotalDeaths,
         totalRecovered: action?.payload?.Global?.TotalRecovered,
         totalCases: action?.payload?.Global?.TotalConfirmed,
@@ -50,11 +52,13 @@ export default function globalSummaryReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        err: "",
       };
     case GET_SEARCH_RESULTS_SUCCESS:
       return {
         ...state,
         loading: false,
+        err: "",
         searchResults: action?.payload,
         countries: action?.payload?.Countries,
       };
@@ -69,6 +73,7 @@ export default function globalSummaryReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        err: "",
       };
     case SORT_FROM_LOWEST_SUCCESS:
       return {
@@ -76,6 +81,7 @@ export default function globalSummaryReducer(state = initialState, action) {
         loading: false,
         searchResults: action?.payload,
         countries: action?.payload?.Countries,
+        err: "",
       };
     case SORT_FROM_LOWEST_FAIL:
       return {
@@ -88,11 +94,13 @@ export default function globalSummaryReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        err: "",
       };
     case SORT_FROM_HIGHEST_SUCCESS:
       return {
         ...state,
         loading: false,
+        err: "",
         searchResults: action?.payload,
         countries: action?.payload?.Countries,
       };

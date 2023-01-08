@@ -11,6 +11,7 @@ import SearchForm from "../forms/SearchForm";
 import { debounce } from "lodash";
 import { useMemo } from "react";
 import RankCountries from "./RankCountries";
+import Loading from "./Loading";
 
 export const CountryCard = () => {
   const dispatch = useDispatch();
@@ -18,10 +19,11 @@ export const CountryCard = () => {
     dispatch(getGlobalSummaryActions());
   }, [dispatch]);
 
-  const { countries, searchResults } = useSelector(
+  const { countries, searchResults, loading } = useSelector(
     ({ globalSummaryReducer }) => ({
       countries: globalSummaryReducer.countries,
       searchResults: globalSummaryReducer.searchResults,
+      loading: globalSummaryReducer.loading,
     })
   );
 
@@ -38,17 +40,15 @@ export const CountryCard = () => {
   };
 
   const mappingCountries = ({ country }) => (
-    <Col>
-    <div key={country.ID}>
-      <Card className="text-center">
-        <Card.Body>
-          <Card.Title>{country?.Country}</Card.Title>
-          <Card.Text>Cases: {country?.TotalConfirmed}</Card.Text>
-          <Card.Text>Recovered: {country?.NewRecovered}</Card.Text>
-          <Card.Text>Deaths: {country?.NewDeaths}</Card.Text>
-        </Card.Body>
-      </Card>
-      </div>
+    <Col key={country.ID}>
+        <Card className="text-center">
+          <Card.Body>
+            <Card.Title>{country?.Country}</Card.Title>
+            <Card.Text>Cases: {country?.TotalConfirmed}</Card.Text>
+            <Card.Text>Recovered: {country?.NewRecovered}</Card.Text>
+            <Card.Text>Deaths: {country?.NewDeaths}</Card.Text>
+          </Card.Body>
+        </Card>
     </Col>
   );
 
@@ -73,7 +73,7 @@ export const CountryCard = () => {
         lowestBtnHandler={lowestBtnHandler}
       />
       <Row xs={1} md={6} className="g-4" style={{ margin: "0px" }}>
-        {listCountries}
+        {loading ? <Loading /> : listCountries}
       </Row>
     </>
   );
