@@ -39,7 +39,8 @@ export const CountryCard = () => {
 
   const mappingCountries = ({ country }) => (
     <Col>
-      <Card key={country.Slug} className="text-center">
+    <div key={country.ID}>
+      <Card className="text-center">
         <Card.Body>
           <Card.Title>{country?.Country}</Card.Title>
           <Card.Text>Cases: {country?.TotalConfirmed}</Card.Text>
@@ -47,6 +48,7 @@ export const CountryCard = () => {
           <Card.Text>Deaths: {country?.NewDeaths}</Card.Text>
         </Card.Body>
       </Card>
+      </div>
     </Col>
   );
 
