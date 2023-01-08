@@ -5,11 +5,19 @@ import {
     GET_SEARCH_RESULTS,
     GET_SEARCH_RESULTS_SUCCESS,
     GET_SEARCH_RESULTS_FAIL,
+    SORT_FROM_LOWEST,
+    SORT_FROM_LOWEST_SUCCESS,
+    SORT_FROM_LOWEST_FAIL,
+    SORT_FROM_HIGHEST,
+    SORT_FROM_HIGHEST_SUCCESS,
+    SORT_FROM_HIGHEST_FAIL,
   } from "../Types";
   
   import {
     getGlobalSummaryService,
     getSearchByCountryResultsService,
+    sortByCountryFromLowestService,
+    sortByCountryFromHighestService
   } from "../Services";
   
   export const getGlobalSummaryActions = () => async (dispatch) => {
@@ -44,6 +52,42 @@ import {
       dispatch({
         type: GET_SEARCH_RESULTS_FAIL,
         err: "Cannot fetch search results!",
+      });
+    } 
+  };
+
+  export const sortByCountryFromLowestActions = (searchResults, countries) => async (dispatch) => {
+    dispatch({
+      type: SORT_FROM_LOWEST,
+    });
+    try {
+      const data = await sortByCountryFromLowestService(searchResults, countries);
+      dispatch({
+        type: SORT_FROM_LOWEST_SUCCESS,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({
+        type: SORT_FROM_LOWEST_FAIL,
+        err: "Cannot rank countries!",
+      });
+    } 
+  };
+
+  export const sortByCountryFromHighestActions = (searchResults, countries) => async (dispatch) => {
+    dispatch({
+      type: SORT_FROM_HIGHEST,
+    });
+    try {
+      const data = await sortByCountryFromHighestService(searchResults, countries);
+      dispatch({
+        type: SORT_FROM_HIGHEST_SUCCESS,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({
+        type: SORT_FROM_HIGHEST_FAIL,
+        err: "Cannot rank countries!",
       });
     } 
   };
