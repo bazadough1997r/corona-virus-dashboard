@@ -1,7 +1,13 @@
-import React from "react";
+import CountryCard from "./layouts/CountryCard";
+import HomeCards from "./layouts/HomeCards";
 
 const App = () => {
-  return <div className="App">hello </div>;
-}
+  return (
+    <>
+      <HomeCards />
+      <CountryCard />
+    </>
+  );
+};
 
 export default App;
