@@ -48,11 +48,6 @@ export default function globalSummaryReducer(state = initialState, action) {
       case GET_SEARCH_RESULTS_SUCCESS:
         return {
           ...state,
-          loading: false,
-          totalDeaths: action?.payload?.Global?.TotalDeaths,
-          totalRecovered: action?.payload?.Global?.TotalRecovered,
-          totalCases: action?.payload?.Global?.TotalConfirmed,
-          countries:action?.payload?.Countries,
           searchResults:action?.payload,
         };
       case GET_SEARCH_RESULTS_FAIL:

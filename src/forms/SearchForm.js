@@ -1,35 +1,19 @@
-import { useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import { getSearchByCountryResultsActions } from "../store/Actions";
 
-export const SearchForm = ({ countries }) => {
+export const SearchForm = () => {
   const dispatch = useDispatch();
 
-  const [countrySearch, setCountrySearch] = useState("World Wide");
-  const clickHandler = ({ e, country }) => {
-    e.preventDefault();
-    dispatch(getSearchByCountryResultsActions(country));
-    setCountrySearch(country);
+  const changeHandler = (event) => {
+    dispatch(getSearchByCountryResultsActions(event.target.value));
   };
+
   return (
-    <DropdownButton
-      style={{ margin: "10px" }}
-      variant="outline-secondary"
-      title={countrySearch}
-      id="input-group-dropdown-1"
-    >
-      {countries.map((country) => (
-        <Dropdown.Item
-          key={country.Country}
-          href={country.Country}
-          onClick={clickHandler}
-        >
-          {country.Country}
-        </Dropdown.Item>
-      ))}
-    </DropdownButton>
+    <div style={{ margin: "10px" }}>
+      <Form.Label>Search by country</Form.Label>
+      <Form.Control onChange={changeHandler} type="text" />
+    </div>
   );
 };
 

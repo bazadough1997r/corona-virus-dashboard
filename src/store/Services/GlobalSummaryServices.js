@@ -3,7 +3,6 @@ import API from "./APIs";
 export const getGlobalSummaryService = () => {
   return API.get(`/summary`)
     .then((res) => {
-      console.log(res.data);
       return res.data;
     })
     .catch((err) => {
@@ -12,12 +11,12 @@ export const getGlobalSummaryService = () => {
 };
 
 export const getSearchByCountryResultsService = (query) => {
-  return API.get(`/country/${query}`)
-    .then((data) => {
-      console.log(data);
-      return data?.data || [];
+  return API.get(`/summary`)
+    .then((res) => {
+      const results = res?.data?.Countries.filter((country) =>country?.Slug.includes(query));
+      return results;
     })
     .catch((err) => {
-      return err;
+      return Promise.reject(err);
     });
 };
