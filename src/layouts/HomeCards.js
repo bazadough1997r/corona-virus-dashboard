@@ -1,21 +1,22 @@
 import { Card, CardGroup } from "react-bootstrap";
-import { useDispatch,useSelector } from "react-redux";
-import {getGlobalSummaryActions} from "../store/Actions"
+import { useDispatch, useSelector } from "react-redux";
+import { getGlobalSummaryActions } from "../store/Actions";
 import { useEffect } from "react";
 
 const HomeCards = () => {
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getGlobalSummaryActions());
+  }, [dispatch]);
 
-useEffect(() => {
-  dispatch(getGlobalSummaryActions())
-}, [dispatch]);
-
-const { totalDeaths, totalRecovered, totalCases } = useSelector(({ globalSummaryReducer }) => ({
-  totalDeaths: globalSummaryReducer.totalDeaths,
-  totalRecovered: globalSummaryReducer.totalRecovered,
-  totalCases: globalSummaryReducer.totalCases
-}));
+  const { totalDeaths, totalRecovered, totalCases } = useSelector(
+    ({ globalSummaryReducer }) => ({
+      totalDeaths: globalSummaryReducer.totalDeaths,
+      totalRecovered: globalSummaryReducer.totalRecovered,
+      totalCases: globalSummaryReducer.totalCases,
+    })
+  );
 
   return (
     <CardGroup>

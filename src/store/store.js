@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import globalSummaryReducer from './Reducers/GlobalSummaryReducer'
+import { configureStore } from "@reduxjs/toolkit";
+import globalSummaryReducer from "./Reducers/GlobalSummaryReducer";
 
 export const store = configureStore({
   reducer: {

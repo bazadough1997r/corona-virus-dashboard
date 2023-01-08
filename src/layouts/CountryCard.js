@@ -41,14 +41,14 @@ export const CountryCard = () => {
 
   const mappingCountries = ({ country }) => (
     <Col key={country.ID}>
-        <Card className="text-center">
-          <Card.Body>
-            <Card.Title>{country?.Country}</Card.Title>
-            <Card.Text>Cases: {country?.TotalConfirmed}</Card.Text>
-            <Card.Text>Recovered: {country?.NewRecovered}</Card.Text>
-            <Card.Text>Deaths: {country?.NewDeaths}</Card.Text>
-          </Card.Body>
-        </Card>
+      <Card className="text-center">
+        <Card.Body>
+          <Card.Title>{country?.Country}</Card.Title>
+          <Card.Text>Cases: {country?.TotalConfirmed}</Card.Text>
+          <Card.Text>Recovered: {country?.NewRecovered}</Card.Text>
+          <Card.Text>Deaths: {country?.NewDeaths}</Card.Text>
+        </Card.Body>
+      </Card>
     </Col>
   );
 
